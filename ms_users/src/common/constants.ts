@@ -1,5 +1,6 @@
 export enum RabbitMQ {
   USER_QUEUE = 'user',
+  EMAIL_QUEUE = 'email',
 }
 
 export enum UserMessages {
@@ -9,4 +10,8 @@ export enum UserMessages {
   FIND_ALL = 'FIND_USERS',
   FIND_ONE = 'FIND_USER',
   VALID = 'VALID_USER',
+}
+
+export enum EmailMessages {
+  SEND_EMAIL = 'SEND_EMAIL',
 }

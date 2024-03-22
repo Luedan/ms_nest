@@ -1,35 +1,15 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 import { EmailService } from './email.service';
-import { CreateEmailDto } from './dto/create-email.dto';
-import { UpdateEmailDto } from './dto/update-email.dto';
+import { SendEmailDto } from './dto/send-email.dto';
+import { EmailMessages } from '@/common/constants';
 
 @Controller()
 export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
-  @MessagePattern('createEmail')
-  create(@Payload() createEmailDto: CreateEmailDto) {
-    return this.emailService.create(createEmailDto);
-  }
-
-  @MessagePattern('findAllEmail')
-  findAll() {
-    return this.emailService.findAll();
-  }
-
-  @MessagePattern('findOneEmail')
-  findOne(@Payload() id: number) {
-    return this.emailService.findOne(id);
-  }
-
-  @MessagePattern('updateEmail')
-  update(@Payload() updateEmailDto: UpdateEmailDto) {
-    return this.emailService.update(updateEmailDto.id, updateEmailDto);
-  }
-
-  @MessagePattern('removeEmail')
-  remove(@Payload() id: number) {
-    return this.emailService.remove(id);
+  @MessagePattern(EmailMessages.SEND_EMAIL)
+  create(@Payload() sendEmailDto: SendEmailDto) {
+    return this.emailService.send(sendEmailDto);
   }
 }
