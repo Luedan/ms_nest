@@ -13,12 +13,16 @@ import { Observable } from 'rxjs';
 import { UserResponseDto } from './dto/userResponse.dto';
 import { UserMessages } from '@/common/constants';
 import { ApiTags } from '@nestjs/swagger';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Controller('user')
 @ApiTags('User')
 export class UserController {
-  constructor(private readonly clientProxy: ClientProxyGateway) {}
-  private _clientProxyUser = this.clientProxy.clientProxyUsers();
+  private _clientProxyUser: ClientProxy;
+
+  constructor(private readonly clientProxy: ClientProxyGateway) {
+    this._clientProxyUser = this.clientProxy.clientProxyUsers();
+  }
 
   @Post()
   create(@Body() userDto: UserRequestDto): Observable<UserResponseDto> {

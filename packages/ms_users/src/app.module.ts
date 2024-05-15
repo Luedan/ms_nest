@@ -7,7 +7,7 @@ import { User } from './user/entities/user.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env',
+      envFilePath: '../../.env',
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
@@ -26,4 +26,15 @@ import { User } from './user/entities/user.entity';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    console.log(
+      'hola mundoooooooooooo',
+      123123123123,
+      process.env.PG_HOST,
+      process.env.PG_USER,
+      process.env.PG_PASSWORD,
+      process.env.PG_DATABASE,
+    );
+  }
+}

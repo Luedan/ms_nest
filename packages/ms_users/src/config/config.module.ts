@@ -6,13 +6,14 @@ import { User } from 'src/user/entities/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.PG_HOST,
       port: 5432,
-      username: 'postgres',
-      password: '5326',
-      database: 'ms_test',
+      username: process.env.PG_USER,
+      password: process.env.PG_PASSWORD,
+      database: process.env.PG_DATABASE,
       synchronize: true,
       entities: [User],
+      logging: true,
     }),
   ],
   exports: [],
